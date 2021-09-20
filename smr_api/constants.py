@@ -1,0 +1,5 @@
+BASE_URL = 'https://api.school.mosreg.ru/mobile/v6.0/'
+AUTH_URL = BASE_URL + 'authorizations/bycredentials'
+CLIENT_ID = '0c5681bfcd704ff1894763e1d076d3ab'
+CLIENT_SECRET = '612055aebca34a7db62accf62536a2f6'
+ALL_SCOPE = 'CommonInfo,EducationalInfo'
