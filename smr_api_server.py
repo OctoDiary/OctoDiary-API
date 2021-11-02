@@ -2,9 +2,11 @@ from smr_api.diary import Diary
 from smr_api.exceptions import LoginFailedException
 
 from flask import Flask, request, abort
+from flask_cors import CORS
 
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 get = lambda route: app.route(route, methods=['GET'])
 post = lambda route: app.route(route, methods=['POST'])
 diary = None
