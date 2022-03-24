@@ -1,9 +1,8 @@
-from smr_api.diary import Diary
-from smr_api.exceptions import LoginFailedException
-
 from flask import Flask, request, abort
 from flask_cors import CORS
 
+from smr_api.diary import Diary
+from smr_api.exceptions import LoginFailedException
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -29,6 +28,12 @@ def auth():
 def user():
     resp = Diary(token=request.headers['Access-Token'], user_id=request.headers['User-ID']).__dict__
     del resp['session'], resp['token']
+    return resp
+
+
+@get('/diary')
+def day_diary():
+    resp = Diary(token=request.headers['Access-Token'], user_id=request.headers['User-ID']).get_weeks()
     return resp
 
 

@@ -1,6 +1,7 @@
 import requests
-from smr_api.exceptions import *
+
 from smr_api.constants import *
+from smr_api.exceptions import *
 
 
 class Diary:
@@ -21,8 +22,8 @@ class Diary:
         me = self.get_me_user()['contextPersons'][0]
         self.avatarUrl = me['avatarUrl']
         self.userId = me['userId']
-        self.personId = me['personId']
         self.sex = me['sex']
+        self.personId = me['personId']
         self.firstName = me['firstName']
         self.lastName = me['lastName']
         self.middleName = me['middleName']
@@ -67,9 +68,14 @@ class Diary:
             raise InvalidRequestException
 
     def get_me_user(self) -> dict:
-        return self.session.\
+        return self.session. \
             get(BASE_URL + 'users/' + str(self.userId) + '/context').json()
 
     def get_rating(self) -> dict:
-        return self.session.\
+        return self.session. \
             get(BASE_URL + 'persons/' + str(self.personId) + '/groups/' + str(self.groupId) + '/rating').json()
+
+    def get_weeks(self) -> dict:
+        return self.session. \
+            get(BASE_URL + 'persons/' + str(self.personId) + '/schools/' + str(self.schoolId) + '/groups/' +
+                str(self.groupId) + '/diary', params={'id': '', 'loadType': 'Undefined'}).json()
