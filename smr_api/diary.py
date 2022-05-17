@@ -37,9 +37,7 @@ class Diary:
         self.className = group['name']
         self.classLetter = group['name'][-1]
         self.classNumber = int(group['name'][:-1])
-        rating = self.get_rating()
-        self.rankingPlace = rating['history']['rankingPosition']['place']
-        self.rankingHistory = rating['history']['historyItems']
+        self.ranking = self.get_rating()
 
     def token_get(self, login: str, password: str) -> str:
         response = self.session.post(AUTH_URL, json={
