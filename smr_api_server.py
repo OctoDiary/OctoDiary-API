@@ -1,3 +1,5 @@
+import json
+
 from flask import Flask, request, abort
 from flask_cors import CORS
 
@@ -35,6 +37,11 @@ def user():
 def day_diary():
     resp = Diary(token=request.headers['Access-Token'], user_id=request.headers['User-ID']).get_weeks()
     return resp
+
+
+@get('/sample_diary')
+def sample_diary():
+    return json.load(open(__file__.replace('smr_api_server.py', 'sample_diary.json'), encoding='utf-8'))
 
 
 if __name__ == '__main__':
